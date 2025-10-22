@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Towing Company, LLC — Driver Portal</title>
+
+<!-- 
+=========================================
+ADMIN INSTRUCTIONS: DRIVER ID MANAGEMENT
+=========================================
+(Keep this section commented until needed)
+• Each driver uses a unique numeric ID (e.g., 1001, 1002, etc.) defined in the `ids` object below.
+• To add, edit, or remove a driver:
+    1. Open this file in any text editor (e.g., Notepad).
+    2. Locate the section:  const ids = { … };
+    3. Add new lines in the format:  DriverID: "DriverName",
+       Example:  1020: "Luis",
+    4. Save and push the updated file to GitHub.
+• Only edit inside the `ids` block. Do not modify script logic or button URLs.
+• Replace the dummy Stripe invoice IDs in the link hrefs once live invoice templates are finalized.
+• This single file can safely serve all drivers; inactive or former drivers can be removed by deleting their ID.
+• When maintenance is complete, re-comment this block before redeploying.
+-->
+
+<style>
+  body {font-family:sans-serif;background:#f4f4f4;text-align:center;padding:40px;}
+  h2 {color:#333;}
+  .btn {display:block;margin:10px auto;width:220px;padding:12px;
+        background:#0070f3;color:#fff;text-decoration:none;
+        border-radius:8px;font-weight:bold;}
+  .instructions {
+        max-width:600px;
+        margin:30px auto;
+        text-align:left;
+        background:#fff;
+        border-radius:10px;
+        padding:20px 30px;
+        box-shadow:0 2px 6px rgba(0,0,0,0.1);
+        line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<script>
+// ---------- DRIVER ID LIST ----------
+const ids = {
+  1001: "Mike",
+  1002: "Jane",
+  1003: "Al",
+  1004: "Rosa"
+  // …continue up to 200 drivers
+};
+
+// ---------- PROMPT + VERIFY ----------
+let code = prompt("Enter your Driver ID:");
+let name = ids[code];
+if (!name) {
+  document.body.innerHTML = "<h2>Access Denied / Invalid ID</h2>";
+} else {
+  document.write(`
+    <h2>Welcome, ${name}</h2>
+    <p>Select a transaction type:</p>
+    <a class="btn" href="https://dashboard.stripe.com/acct_1SAvBQKQz7TF1SGm/test/invoices/in_1SKVrTKQz7TF1SGmlrAwfJiZ" target="_blank"><b>Battery</b></a>
+    <a class="btn" href="https://dashboard.stripe.com/acct_1SAvBQKQz7TF1SGm/test/invoices/in_1SKk8IKQz7TF1SGma5UHxlew" target="_blank"><b>Towing / Misc</b></a>
+    <a class="btn" href="https://dashboard.stripe.com/acct_1SAvBQKQz7TF1SGm/test/invoices/in_1SKTHJKQz7TF1SGmrlYGAqeK" target="_blank"><b>Release Fee</b></a>
+    
+   <div class="instructions">
+  <ul style="list-style-type:none; padding-left:0;">
+    <li>1️⃣ Click the appropriate template button above.</li>
+    <li>2️⃣ Click the <b>three dots (&middot;&middot;&middot;)</b> in the upper right corner by “Charge Customer” and select <b>“Duplicate Invoice”</b> from the dropdown menu.</li>
+    <li>3️⃣ Edit the new copy — add battery, towing, or release amounts as needed.</li>
+    <li>4️⃣ Click <b>“Review Invoice” → “Finalize”</b> and <b>“Continue”</b> to create the payment page.</li>
+    <li>5️⃣ Present to customer for Tap-to-Pay or enter card information manually.</li>
+    <li>6️⃣ At customer's request, return to your newly paid invoice, choose <b>“Send Receipt”</b>, and after just close the browser tab which will return you to this page ready for your next sale.</li>
+  </ul>
+</div>
+
+    <p style="margin-top:30px;font-size:0.9em;color:#666">
+      ⚠️ Do <b>not</b> finalize or modify the original templates.<br>
+      Duplicate first, then edit and finalize your copy.
+    </p>
+  `);
+}
+</script>
+
+</body>
+</html>
